@@ -4,7 +4,7 @@
 
 #### 前端基于`vue`,`element-ui`,`axios`等开发,后端基于`node`,`express`,`request`,`cors`等开发.
 
-#### 数据采集通过[GitHub Developer REST API](https://developer.github.com/v3/).此公开接口会针对`IP`进行调用`次数`和`频率`等限制(少的可怜).对诸如用户`邮箱`等`敏感信息`需要[授权](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)应用之后,传递`access_token`参数才可访问!如果你想更好的使用本应用,可以通过`授权登录`来获得更佳体验.
+#### 数据采集通过[GitHub Developer REST API](https://developer.github.com/v3/).此公开接口会针对`IP`进行调用`次数`和`频率`等限制(少的可怜).对诸如用户`邮箱`等`敏感信息`需要[授权](https://developer.github.com/apps/building-oauth-apps/authorizing-oauth-apps/)应用之后,传递`access_token`参数才可访问!如果你想更好的使用本应用,可以通过`授权登录`来获得更佳体验.
 
 #### 本页面仅用于交流和学习,请勿滥用他人信息!!!
 
