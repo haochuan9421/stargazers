@@ -157,7 +157,7 @@ export default {
         background: 'rgba(0, 0, 0, 0.7)'
       })
       axios({
-        baseURL: 'http://zhc.im:9000/token',
+        baseURL: 'https://zhc.im:9000/token',
         params: { code }
       }).then((res) => {
         if (res.data.code === 200) {
