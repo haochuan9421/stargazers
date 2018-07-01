@@ -19,14 +19,14 @@
       <li><b>创建时间: </b><span>{{repoInfo.created_at | date}}</span></li>
       <li><b>上次更新: </b><span>{{repoInfo.updated_at | date}}</span></li>
     </ul>
-    <el-table :data="tableData" v-loading="loading" size="medium" stripe border style="width: 100%">
+    <el-table :data="tableData" v-loading="loading" size="medium" border style="width: 100%">
       <el-table-column type="index" label="序号" :index="indexMethod" align="center" header-align="center" width="80"></el-table-column>
       <el-table-column align="center" header-align="center" label="头像" width="100">
         <template slot-scope="scope">
           <img class='avatar' :src="scope.row.avatar_url">
         </template>
       </el-table-column>
-      <el-table-column align="center" header-align="center" label="账号" width="180">
+      <el-table-column align="center" header-align="center" label="账号" width="150">
         <template slot-scope="scope">
           <a :href="scope.row.html_url" target="_blank">{{scope.row.login}}</a>
         </template>
@@ -70,7 +70,7 @@
       </el-table-column>
     </el-table>
     <div class="pagination">
-      <el-pagination background layout="prev, pager, next, jumper" :page-size="30" :total="total" @current-change="changePage"></el-pagination>
+      <el-pagination background layout="prev, pager, next, sizes, jumper" :current-page.sync="page" :page-size="per_page" :page-sizes="[10, 20, 30, 50, 100]" :total="total" @size-change="pageSizeChange" @current-change="getStargazers"></el-pagination>
     </div>
     <p class='des'>Star过万的项目,调转到最后几页可能会报错</p>
   </div>
@@ -103,10 +103,11 @@ export default {
   data () {
     return {
       repoInfo: {},
-      user: 'haochuan9421',
-      repo: 'stargazers',
+      user: 'ElemeFE',
+      repo: 'element',
       token: '',
       page: 1,
+      per_page: 10,
       total: 0,
       tableData: [],
       loading: false
@@ -174,10 +175,6 @@ export default {
         loading.close()
       })
     },
-    changePage (page) {
-      this.page = page
-      this.getStargazers()
-    },
     getRepoInfo () {
       this.page = 1
 
@@ -202,12 +199,13 @@ export default {
         return
       }
       this.loading = true
-
+      this.tableData = []
       let options = {
         method: 'get',
         baseURL: `https://api.github.com/repos/${this.user}/${this.repo}/stargazers`,
         params: {
-          page: this.page
+          page: this.page,
+          per_page: this.per_page
         }
       }
       if (this.token) {
@@ -256,8 +254,13 @@ export default {
       }
       return axios(options)
     },
+    pageSizeChange (size) {
+      console.log(size)
+      this.per_page = size
+      this.getStargazers()
+    },
     indexMethod (index) {
-      return (this.page - 1) * 30 + index + 1
+      return (this.page - 1) * this.per_page + index + 1
     }
   },
   filters: {
