@@ -13,7 +13,7 @@
     <ul v-if="Object.keys(repoInfo).length>0" class='repo'>
       <li><b>项目名: </b><a :href="repoInfo.html_url" target="_blank">{{repoInfo.name}}</a></li>
       <li><b>是否原创: </b><span>{{repoInfo.fork?'否':'是'}}</span></li>
-      <li><b>Watch: </b><span>{{repoInfo.watchers_count}}</span></li>
+      <li><b>Watch: </b><span>{{repoInfo.subscribers_count}}</span></li>
       <li><b>Star: </b><span>{{repoInfo.stargazers_count}}</span></li>
       <li><b>Fork: </b><span>{{repoInfo.forks_count}}</span></li>
       <li><b>创建时间: </b><span>{{repoInfo.created_at | date}}</span></li>
