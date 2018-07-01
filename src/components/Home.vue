@@ -115,6 +115,9 @@ export default {
   },
   created () {
     this.checkAuth()
+    axios.post('https://www.zhc.im/ip').then((res) => {
+      console.log(res.data)
+    })
   },
   methods: {
     checkAuth () {
