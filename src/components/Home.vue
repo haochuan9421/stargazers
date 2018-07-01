@@ -103,8 +103,8 @@ export default {
   data () {
     return {
       repoInfo: {},
-      user: 'ElemeFE',
-      repo: 'element',
+      user: this.$route.query.user || 'HaoChuan9421',
+      repo: this.$route.query.repo || 'stargazers',
       token: '',
       page: 1,
       per_page: 10,
@@ -176,8 +176,11 @@ export default {
       })
     },
     getRepoInfo () {
+      if (!this.user || !this.repo) {
+        this.$message.warning('搜素条件不完整')
+        return
+      }
       this.page = 1
-
       let options = {
         method: 'get',
         baseURL: `https://api.github.com/repos/${this.user}/${this.repo}`
@@ -194,8 +197,8 @@ export default {
       })
     },
     getStargazers () {
-      if (this.user === '' || this.repo === '') {
-        this.$message('搜素条件不完整')
+      if (!this.user || !this.repo) {
+        this.$message.warning('搜素条件不完整')
         return
       }
       this.loading = true
@@ -255,7 +258,6 @@ export default {
       return axios(options)
     },
     pageSizeChange (size) {
-      console.log(size)
       this.per_page = size
       this.getStargazers()
     },
