@@ -48,7 +48,7 @@
       </el-table-column>
       <el-table-column align="center" header-align="center" label="博客" min-width="180">
         <template slot-scope="scope">
-          <a v-if="scope.row.blog" :href="scope.row.blog" target="_blank">{{scope.row.blog}}</a>
+          <a v-if="scope.row.blog" :href="scope.row.blog.indexOf('http') === -1?`http://${scope.row.blog}` : scope.row.blog" target="_blank">{{scope.row.blog}}</a>
           <span v-else>无博客链接</span>
         </template>
       </el-table-column>
